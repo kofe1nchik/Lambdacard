@@ -1,0 +1,21 @@
+{
+  "name": "my-vocab-extension",
+  "private": true,
+  "version": "1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "zip": "npm run build && cd dist && npx bestzip ../lambdacards.zip *"
+  },
+  "devDependencies": {
+    "@crxjs/vite-plugin": "^2.0.0-beta.33",
+    "bestzip": "^2.2.1",
+    "vite": "^7.2.4"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.19",
+    "ts-fsrs": "^5.2.3"
+  }
+}
