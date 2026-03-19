@@ -86,6 +86,26 @@ export const dbApi = {
     });
   },
 
+  updateDeck: async (id, newName) => {
+    const db = await dbApi.open();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("decks", "readwrite");
+      const store = tx.objectStore("decks");
+      
+      const getRequest = store.get(id);
+      getRequest.onsuccess = () => {
+        const data = getRequest.result;
+        if (data) {
+          data.name = newName; 
+          store.put(data);    
+        }
+      };
+
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+  },
+
   getOrCreateDefaultDeck: async () => {
     const db = await dbApi.open();
     return new Promise((resolve, reject) => {
